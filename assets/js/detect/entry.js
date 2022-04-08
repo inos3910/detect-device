@@ -1,9 +1,7 @@
 export class DetectDevice {
   constructor() {
-    window.addEventListener('DOMContentLoaded', () => {
-      this.createModels();
-      this.bind();
-    });
+    this.createModels();
+    this.bind();
   }
 
   createModels() {
@@ -20,8 +18,10 @@ export class DetectDevice {
 
   bind() {
     //初回実行
-    this.detect(this.mql);
-    
+    window.addEventListener('load', () => {
+      this.detect(this.mql);
+    });
+
     window.addEventListener('resize', () => {
       if(!this.resizeFlag){
         return;
