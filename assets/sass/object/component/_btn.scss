@@ -14,7 +14,11 @@
   }
 
   @media (any-hover:hover) {
+    transition: $transition; 
+    cursor: pointer;
+    
     &:hover{
+      background: $blue;
     }
   }
 

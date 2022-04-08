@@ -9,22 +9,18 @@ export class DetectDevice {
   createModels() {
     this.resizeFlag  = true;
     this.resizeTimer = null;
-    this.isTouch     = this.isTouchDevice();
+    //hover判定（hoverが使えるかどうか）
+    this.isHover     = window.matchMedia("(any-hover:hover)").matches;
     this.mql         = window.matchMedia('screen and (min-width: 768px)');
-    this.target = document.getElementById('js-output');
-  }
-
-  //タッチデバイス判定
-  isTouchDevice() {
-    return !window.matchMedia("(any-hover:hover)").matches;
+    this.isSp        = null;
+    this.isTablet    = null;
+    this.isPC        = null;
+    this.target      = document.getElementById('js-output');
   }
 
   bind() {
     //初回実行
     this.detect(this.mql);
-
-    //ブレークポイントが切り替わったタイミングで実行
-    // this.mql.addEventListener('change', this.detect);
     
     window.addEventListener('resize', () => {
       if(!this.resizeFlag){
@@ -49,23 +45,23 @@ export class DetectDevice {
   detect = (mql) => {
     //タブレットかPC
     if (mql.matches) {
-      //タッチデバイス判定の更新
-      this.isTouch = this.isTouchDevice();
-      //タッチデバイスの場合
-      if(this.isTouch){
-        this.target.textContent = 'タブレット';
-        console.log('タブレット');
-        this.isSp     = false;
-        this.isTablet = true;
-        this.isPC     = false;
-      }
+      //hover判定の更新
+      this.isHover  = window.matchMedia("(any-hover:hover)").matches;
       //タッチデバイスでない場合
-      else{
+      if(this.isHover){
         this.target.textContent = 'PC';
         console.log('PC');
         this.isSp     = false;
         this.isTablet = false;
         this.isPC     = true;
+      }
+      //タッチデバイスの場合
+      else{
+        this.target.textContent = 'タブレット（タッチデバイス）';
+        console.log('タブレット（タッチデバイス）');
+        this.isSp     = false;
+        this.isTablet = true;
+        this.isPC     = false;
       }
 
     }
