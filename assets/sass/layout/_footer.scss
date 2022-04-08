@@ -1,8 +1,35 @@
 @use "global" as *;
 
 .l-footer {
+  position: relative;
+  z-index: 200;
+  background: #fff;
   @include responsive(md) {
   }
   @include responsive(xl) {
+  }
+
+  &__inner{
+    text-align: center;
+    padding: 60px 0;
+    @include responsive(md) {
+    }
+    @include responsive(xl) {
+    }
+  }
+
+  &__back{
+    line-height: 1.6;
+    color: $blue;
+    @include responsive(md) {
+    }
+    @include responsive(xl) {
+    }
+
+    @media (any-hover:hover) {
+      &:hover{
+        text-decoration: underline;
+      }
+    }
   }
 }

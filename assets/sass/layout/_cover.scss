@@ -1,9 +1,8 @@
 @use "global" as *;
-// @use "global/variable" as *;
-// @use "global/mixin" as *;
-// @use "global/function" as *;
-
 .l-cover {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   @include responsive(md) {
   }
   @include responsive(xl) {
